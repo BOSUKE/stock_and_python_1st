@@ -1,0 +1,2 @@
+# stock_and_python_1st
+株とPythonでお金儲けを目指す本 ソースコード
