@@ -9,16 +9,17 @@ def get_brand(code):
 
   q = PyQuery(url)
 
-  if len(q.find('.stock_st_table')) == 0:
+  if len(q.find('div.company_block')) == 0:
     return None
 
   try:
-    name = q.find('#kobetsu_right > h4')[0].text
-    short_name = q.find('td.kobetsu_data_table1_meigara')[0].text
-    market = q.find('td.kobetsu_data_table1_meigara + td')[0].text
-    unit_str = q.find('.stock_st_table:eq(1) > tr:eq(5) > td.tar:eq(0)')[0].text
+    name = q.find('div.company_block > h3').text()
+    code_short_name =  q.find('#stockinfo_i1 > div.si_i1_1 > h2').text()
+    short_name = code_short_name[code_short_name.find(" ") + 1:]
+    market = q.find('span.market').text()
+    unit_str = q.find('#kobetsu_left > table:nth-child(4) > tbody > tr:nth-child(6) > td').text()
     unit = int(unit_str.split()[0].replace(',', ''))
-    sector = q.find('.kobetsu_data_table2 a')[0].text
+    sector = q.find('#stockinfo_i2 > div > a').text()
   except ValueError:
     return None
 
